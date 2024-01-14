@@ -4,9 +4,14 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params)
-    book.save
-    redirect_to book_path(book.id)
+    @book = Book.new(book_params)
+    if @book.
+      flash[:notice] = "Book was successfully created."
+      redirect_to book_path(@book.id)
+    else
+      flash[:notice] = "投稿に失敗しました。"
+      render :new
+    end
   end
 
   def index
@@ -26,10 +31,13 @@ class BooksController < ApplicationController
     book.update(book_params)
     redirect_to book_path(book.id)  
   end
+  
+  def destroy
+  end
 
   
   private
-  # ストロングパラメータ
+
   def book_params
     params.require(:book).permit(:title, :body)
   end
