@@ -35,7 +35,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id)
     else
       flash[:notice] = "An error has occurred"
-      render :new
+      render :edit
     end
   end
   
